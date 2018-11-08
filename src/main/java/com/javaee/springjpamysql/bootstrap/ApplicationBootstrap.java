@@ -1,11 +1,15 @@
 package com.javaee.springjpamysql.bootstrap;
 
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 
 import com.javaee.springjpamysql.domain.Category;
 import com.javaee.springjpamysql.repositories.CategoryRepository;
 
+@Component
+@Profile({"dev", "prod"})
 public class ApplicationBootstrap implements ApplicationListener<ContextRefreshedEvent>{
 
 	private CategoryRepository categoryRepository;
@@ -24,15 +28,15 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
 	
 	private void loadCategories() {
         Category cat1 = new Category();
-        cat1.setDescription("Franchise");
+        cat1.setDescription("Category 1");
         categoryRepository.save(cat1);
 
         Category cat2 = new Category();
-        cat2.setDescription("Self owner");
+        cat2.setDescription("Category 2");
         categoryRepository.save(cat2);
 
         Category cat3 = new Category();
-        cat3.setDescription("borrowing");
+        cat3.setDescription("Category 3");
         categoryRepository.save(cat3);
     }
 
